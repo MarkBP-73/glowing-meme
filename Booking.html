@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1"> 
+    
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+	
+  </head>
+  
+
+<body>
+<div class="container">
+	<div class="jumbotron text-center">
+		<h1>The DSA Assessment centre project</h1>
+		<p>A new way to approach the DSA</p> 
+	</div>
+	<div class="row">
+		
+		<!-- This will be the search banner. It will include search options to allow 
+			a student to search for local assessment centres and available appointments
+			within a timeframe. -->
+		
+		<div class="col-md-12" style="background-color:lavender;">
+			<button onclick="getLocation()"> Current position </button> 
+            <form>
+			longitude: <br> <input id="longitude" type="text" value="-3.1778748"> <br>
+			latitude: <br> <input id="latitude" type="text" value="51.5896435">
+			 <!-- <p id="geolocation"> Geolocation: </p> -->
+			</form>
+            
+		</div>
+		
+		
+	<div class = "row">
+		<div class="col-md-6">
+			<h3> Nearest Centres </h3>
+			<p> this is where the list of assesment centre which are closest will be displayed. </p>
+		</div>
+		<div class ="col-md-6"> 
+			<div id="map" class="map-container" style="height:400px;"></div>
+		
+		</div>
+		
+	<div class = "row">
+		<div class="col-md-12" style="background-color:lavender; height:200px;">
+		<p> This is where all available appointments will be displayed and can be slected.</p>
+		</div>
+	<div>
+	
+
+		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD2b9CaJAv12_5CJrYzfAf5LaMPEgWlTfM&callback=initMap"
+			async defer> </script>
+		<script type="text/javascript">
+				var map;
+				var myLocation;
+            	myLocation = new Myposition(51.4896435,-3.1778748);
+                
+                function Myposition(latitude,longitude){
+                	this.lat = latitude;
+                    this.lng = longitude;
+                    }
+				
+				function getLocation(){
+					if (navigator.geolocation){
+		                
+						navigator.geolocation.getCurrentPosition(showLocation);
+                        document.getElementById("geolocation").innerHTML += myLocation;
+					}
+					else {
+						document.getElementById("geolocation").innerHTML += "OFF";
+					}
+				}
+				
+				function showLocation(position){
+                    maplong = position.coords.longitude;
+					maplat = position.coords.latitude;
+					document.getElementById("longitude").value = maplong;
+            		document.getElementById("latitude").value = maplat;
+				}
+               
+       		
+				
+		
+			
+			// Set myLocation to current location using geolocation function.
+				
+				
+					function initMap () {
+						map= new google.maps.Map(document.getElementById('map'), {
+							center: myLocation, zoom: 10
+						});
+					}
+		</script>
+			
+		</div>
+					
+	</div>	
+	
+</div>
+
+
+</body>
+
+</html>
